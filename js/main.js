@@ -1,4 +1,4 @@
-const audioContext = new (window.webkitAudioContext || window.AudioContext)();
+const audioContext = window.AudioContext ? new AudioContext() : new webkitAudioContext();
 
 const notes = [
     { name: "C", frequency: 261.63 },
