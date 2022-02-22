@@ -34,22 +34,24 @@ const notes = [
 
 // Connect all of our audio nodes to this gain node so their volume is lower.
 const primaryGainControl = audioContext.createGain();
+// ! VOLUME KNOB
 primaryGainControl.gain.setValueAtTime(0.05, 0);
 primaryGainControl.connect(audioContext.destination);
 
 // Fetch the keys from the DOM
-let noteButton = document.getElementsByClassName('key');
-noteButton = Array.prototype.slice.call(noteButton);
+let whiteNoteButton = document.getElementsByClassName('white-key');
+whiteNoteButton = Array.prototype.slice.call(whiteNoteButton);
 let blackNoteButton = document.getElementsByClassName('black-key');
 blackNoteButton = Array.prototype.slice.call(blackNoteButton);
 
 
 // WHITE KEYS
 for(let i = 0; i < 14; i++){
-    noteButton[i].addEventListener("click", () => {
+    whiteNoteButton[i].addEventListener("click", () => {
         // Create an oscillator at the note's frequency
         const noteOscillator = audioContext.createOscillator();
-        noteOscillator.type = "square";
+        // ! OSCILLATOR WAVE KNOB
+        noteOscillator.type = "triangle";
         noteOscillator.frequency.setValueAtTime(
             notes[i]['frequency'],
             audioContext.currentTime
@@ -66,7 +68,8 @@ for(let i = 0; i < 10; i++){
     blackNoteButton[i].addEventListener("click", () => {
         // Create an oscillator at the note's frequency
         const noteOscillator = audioContext.createOscillator();
-        noteOscillator.type = "square";
+        // ! OSCILLATOR WAVE KNOB
+        noteOscillator.type = "triangle";
         noteOscillator.frequency.setValueAtTime(
             notesSharp[i]['frequency'],
             audioContext.currentTime
@@ -80,4 +83,4 @@ for(let i = 0; i < 10; i++){
   
 
 
-// Oscilator nodes creates a sine wave by default, can be changed to square, sawtooth etc
+// ! Oscilator nodes creates a sine wave by default, can be changed to square, sawtooth etc
